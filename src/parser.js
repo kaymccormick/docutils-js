@@ -1,9 +1,9 @@
-import Parser from './parsers/restructuredtext';
+import * as standalone from './fn/standaloneReader';
 import newDocument from './newDocument';
 import baseSettings from './baseSettings';
+import restParse from './fn/restructuredText';
 
 function parse(docSource, settings) {
-    const parser = new Parser({});
     if (typeof settings === 'undefined') {
         settings = { ...baseSettings };
     }
@@ -11,8 +11,7 @@ function parse(docSource, settings) {
     if (!document.reporter) {
         throw new Error('need document reporter');
     }
-    parser.parse(docSource, document);
-    return document;
+    return restParse(docSource, document);
 }
 
 export default parse;
